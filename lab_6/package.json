@@ -3,9 +3,12 @@
   "version": "1.0.0",
   "description": "Simple JS app with unit tests",
   "main": "app.js",
+  "jest-junit": {
+    "outputDirectory": "./coverage"
+  },
   "scripts": {
     "test": "jest",
-    "coverage": "jest --coverage"
+    "coverage": "jest --coverage --reporters=\"jest-junit\""
   },
   "author": "Siarhei Kharlanau <s.v.harlanov@gmail.com>",
   "license": "ISC",
