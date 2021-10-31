@@ -1,0 +1,29 @@
+{
+  "name": "lab_6_unit_tests",
+  "version": "1.0.0",
+  "description": "Simple JS app with unit tests",
+  "main": "app.js",
+  "scripts": {
+    "test": "jest",
+    "coverage": "jest --coverage"
+  },
+  "author": "Siarhei Kharlanau <s.v.harlanov@gmail.com>",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^27.3.1",
+    "nyc": "^15.1.0"
+  },
+  "nyc": {
+    "all": true,
+    "include": [
+      "*.js"
+    ],
+    "exclude": [
+      "**/*.spec.js"
+    ],
+    "reporter": [
+      "html",
+      "cobertura"
+    ]
+  }
+}
