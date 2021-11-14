@@ -4,7 +4,6 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "example": "tsc && node dist/pages/BookingHomePage.js",
     "test": "jest"
   },
   "author": "",
