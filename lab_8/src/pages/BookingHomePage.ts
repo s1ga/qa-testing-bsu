@@ -1,19 +1,18 @@
-import {Browser, Builder, By, WebDriver, WebElement} from "selenium-webdriver"
+import {By, WebDriver} from "selenium-webdriver"
+import BaseBookingPage from "./BaseBookingPage";
+import BookingAttractionsPage from "./BookingAttractionsPage";
 
-export default class BookingHomePage {
-  private static readonly HOME_PAGE_URL = 'https://www.booking.com/'
+export default class BookingHomePage extends BaseBookingPage {
+  private static readonly HOME_PAGE_URL = "https://www.booking.com/"
 
-  private driver: WebDriver
-
-  private readonly formLocator: By = By.id('frm')
-  private readonly destinationLocator: By = By.id('ss')
+  private readonly attractionsTabLocator: By = By.xpath("//a[@class='bui-tab__link' and @data-decider-header='attractions']")
 
   constructor(driver: WebDriver) {
-    this.driver = driver
+    super(driver)
   }
 
   public isInitialized(): Promise<boolean> {
-    return this.findElementByLocator(this.formLocator).isDisplayed()
+    return super.isInitialized(this.attractionsTabLocator)
   }
 
   public openHomePage(): this {
@@ -24,10 +23,11 @@ export default class BookingHomePage {
     return this
   }
 
-  private findElementByLocator(locator: By) {
-    return this.driver.findElement(locator)
+  public openAttractionsPage(): BookingAttractionsPage {
+    (async () => {
+      await this.findElementByLocator(this.attractionsTabLocator).click()
+    })()
+
+    return new BookingAttractionsPage(this.driver)
   }
 }
-
-new BookingHomePage(new Builder().forBrowser(Browser.CHROME).build())
-  .openHomePage()
