@@ -1,15 +1,16 @@
 import BookingHomePage from "../pages/BookingHomePage"
-import {Browser, Builder, WebDriver} from "selenium-webdriver";
+import {WebDriver} from "selenium-webdriver";
 import BookingAttractionsPage from "../pages/BookingAttractionsPage";
+import {buildChromeDriver} from "../utils";
 
-jest.setTimeout(15000);
+jest.setTimeout(25000);
 
 describe("Booking attractions page", () => {
   let driver: WebDriver
   let bookingAttractionsPage: BookingAttractionsPage
 
   beforeAll(() => {
-    driver = new Builder().forBrowser(Browser.CHROME).build()
+    driver = buildChromeDriver()
   })
 
   beforeEach(() => {
