@@ -1,9 +1,9 @@
 import BookingHomePage from "../pages/BookingHomePage"
-import {WebDriver} from "selenium-webdriver";
-import BookingAttractionsPage from "../pages/BookingAttractionsPage";
-import {buildChromeDriver} from "../utils";
+import {WebDriver} from "selenium-webdriver"
+import BookingAttractionsPage from "../pages/BookingAttractionsPage"
+import {buildChromeDriver} from "../utils"
 
-jest.setTimeout(25000);
+jest.setTimeout(15000)
 
 describe("Booking attractions page", () => {
   let driver: WebDriver
@@ -21,6 +21,15 @@ describe("Booking attractions page", () => {
 
   afterAll(async () => {
     await driver.quit()
+  })
+
+  it("should contain entered text", async () => {
+    const text = "lon"
+    expect(
+      await bookingAttractionsPage
+        .enterTextInSearchForm(text)
+        .getEnteredInFormText()
+    ).toBe(text)
   })
 
   it("should show dropdown with suggestions contains entered text", async () => {
@@ -48,4 +57,4 @@ describe("Booking attractions page", () => {
         .isInitialized()
     ).toBeTruthy()
   })
-});
+})

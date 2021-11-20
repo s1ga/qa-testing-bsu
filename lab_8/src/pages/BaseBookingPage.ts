@@ -12,6 +12,6 @@ export default class BaseBookingPage {
   }
 
   protected findElementByLocator(locator: By): WebElementPromise {
-    return this.driver.wait(until.elementLocated(locator))
+    return this.driver.wait(until.elementLocated(locator), 15000)
   }
 }

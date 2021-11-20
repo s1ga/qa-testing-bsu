@@ -1,6 +1,6 @@
 import {By, WebDriver} from "selenium-webdriver"
-import BaseBookingPage from "./BaseBookingPage";
-import BookingAttractionsPage from "./BookingAttractionsPage";
+import BaseBookingPage from "./BaseBookingPage"
+import BookingAttractionsPage from "./BookingAttractionsPage"
 
 export default class BookingHomePage extends BaseBookingPage {
   private static readonly HOME_PAGE_URL = "https://www.booking.com/"

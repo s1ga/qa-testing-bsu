@@ -1,14 +1,15 @@
-import {Browser, Builder, WebDriver} from "selenium-webdriver"
+import {WebDriver} from "selenium-webdriver"
 import BookingHomePage from "../pages/BookingHomePage"
+import {buildChromeDriver} from "../utils"
 
-jest.setTimeout(15000)
+jest.setTimeout(10000)
 
 describe("Booking home page", () => {
   let driver: WebDriver
   let bookingHomePage: BookingHomePage
 
   beforeAll(() => {
-    driver = new Builder().forBrowser(Browser.CHROME).build()
+    driver = buildChromeDriver()
   })
 
   beforeEach(() => {
