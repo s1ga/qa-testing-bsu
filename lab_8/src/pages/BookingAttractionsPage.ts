@@ -43,7 +43,6 @@ export default class BookingAttractionsPage extends BaseBookingPage {
   public findAttractionsOnClick(): BookingAttractionsResultsPage {
     (async () => {
       await this.findElementByLocator(this.attractionsSearchFormSubmitLocator).click()
-      await this.findElementByLocator(this.attractionsSearchFormSubmitLocator).click()
     })()
 
     return new BookingAttractionsResultsPage(this.driver)
