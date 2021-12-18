@@ -1,14 +1,14 @@
-import {getDataFromEnv} from "../utils/ReadDataFromEnv";
-import User from "../model/User";
+import User from "../model/User"
+import DataReader from "./DataReader"
 
 export class UserCreator {
-  private static readonly username = 'userName'
-  private static readonly password = 'userPassword'
+  private static readonly username = 'user.username'
+  private static readonly password = 'user.password'
 
-  public static getUser(): User {
+  public static async getUser(number: number = 1): Promise<User> {
     return new User(
-      getDataFromEnv(this.username),
-      getDataFromEnv(this.password)
+      await DataReader.read(`${this.username}${number}`),
+      await DataReader.read(`${this.password}${number}`)
     )
   }
 }

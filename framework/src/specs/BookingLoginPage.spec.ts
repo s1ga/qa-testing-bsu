@@ -1,9 +1,7 @@
 import {WebDriver} from "selenium-webdriver"
-import DriverManager from "../driver/DriverManager";
-import BookingLoginPage from "../pages/BookingLoginPage";
-import BookingHomePage from "../pages/BookingHomePage";
-
-jest.setTimeout(15000)
+import DriverManager from "../driver/DriverManager"
+import BookingLoginPage from "../pages/BookingLoginPage"
+import BookingHomePage from "../pages/BookingHomePage"
 
 describe("Booking login page", () => {
   let driver: WebDriver
@@ -28,21 +26,22 @@ describe("Booking login page", () => {
   })
 
   it("should open password input on success username step", async () => {
-    const bookingLoginWithPasswordPage = await bookingLoginPage
-      .enterUsername()
-      .submitForm() as BookingLoginPage
+    const bookingLoginWithPasswordPage = await (
+      await bookingLoginPage.enterUsername()
+    ).submitForm() as BookingLoginPage
     expect(
       await bookingLoginWithPasswordPage.isPasswordInitialized()
     ).toBeTruthy()
   })
 
   it("should open home page with user info on success login steps", async () => {
-    const bookingLoginWithPasswordPage = await bookingLoginPage
-      .enterUsername()
-      .submitForm() as BookingLoginPage
-    const bookingHomePageWithUser = await bookingLoginWithPasswordPage
-      .enterPassword()
-      .submitForm() as BookingHomePage
+    const bookingLoginWithPasswordPage = await (
+      await bookingLoginPage.enterUsername()
+    ).submitForm() as BookingLoginPage
+
+    const bookingHomePageWithUser = await (
+      await bookingLoginWithPasswordPage.enterPassword()
+    ).submitForm() as BookingHomePage
 
     expect(
       await bookingHomePageWithUser.isUserInitialized()

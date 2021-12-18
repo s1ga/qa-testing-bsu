@@ -1,9 +1,7 @@
 import BookingHomePage from "../pages/BookingHomePage"
 import {WebDriver} from "selenium-webdriver"
 import BookingAttractionsPage from "../pages/BookingAttractionsPage"
-import DriverManager from "../driver/DriverManager";
-
-jest.setTimeout(15000)
+import DriverManager from "../driver/DriverManager"
 
 describe("Booking attractions page", () => {
   let driver: WebDriver
@@ -26,23 +24,23 @@ describe("Booking attractions page", () => {
   it("should contain entered text", async () => {
     const text = "lon"
     expect(
-      await bookingAttractionsPage
-        .enterTextInSearchForm(text)
+      await (await bookingAttractionsPage
+        .enterTextInSearchForm(text))
         .getEnteredInFormText()
     ).toBe(text)
   })
 
   it("should show dropdown with suggestions contains entered text", async () => {
     expect(
-      await bookingAttractionsPage
-        .enterTextInSearchForm("lon")
+      await (await bookingAttractionsPage
+        .enterTextInSearchForm("lon"))
         .isSearchDropdownInit()
     ).toBeTruthy()
   })
 
   it("should show results of searching on dropdown list item click", async () => {
-    const bookingAttractionsResultsPage = await bookingAttractionsPage
-      .enterTextInSearchForm("london")
+    const bookingAttractionsResultsPage = await (await bookingAttractionsPage
+      .enterTextInSearchForm("london"))
       .findAttractionsOnDropdownItemClick()
     expect(
       bookingAttractionsResultsPage.isInitialized()
@@ -50,8 +48,8 @@ describe("Booking attractions page", () => {
   })
 
   it("should show results of searching on button click", async () => {
-    const bookingAttractionsResultsPage =  await bookingAttractionsPage
-      .enterTextInSearchForm("london")
+    const bookingAttractionsResultsPage =  await (await bookingAttractionsPage
+      .enterTextInSearchForm("london"))
       .findAttractionsOnClick()
     expect(
       bookingAttractionsResultsPage.isInitialized()

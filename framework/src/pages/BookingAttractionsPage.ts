@@ -1,6 +1,7 @@
 import {By, WebDriver} from "selenium-webdriver"
 import BaseBookingPage from "./BaseBookingPage"
 import BookingAttractionsResultsPage from "./BookingAttractionsResultsPage"
+import {logger} from "../utils/logger";
 
 export default class BookingAttractionsPage extends BaseBookingPage {
   private readonly attractionsSearchFormLocator = By.className("css-1ano46h")
@@ -13,10 +14,11 @@ export default class BookingAttractionsPage extends BaseBookingPage {
   }
 
   public isInitialized(): Promise<boolean> {
+    logger.info("Attraction page initialized")
     return super.isInitialized(this.attractionsSearchFormLocator)
   }
 
-  public enterTextInSearchForm(value: string): this {
+  public enterTextInSearchForm(value: string): Promise<this> {
     return this.enterText(this.attractionsSearchFormInputLocator, value)
   }
 
@@ -32,6 +34,7 @@ export default class BookingAttractionsPage extends BaseBookingPage {
     const btn = await this.findElementByLocator(this.attractionsSearchFormDropdownItemLocator)
     await btn.click()
 
+    logger.info("Attraction results page opened")
     return new BookingAttractionsResultsPage(this.driver)
   }
 
@@ -39,6 +42,7 @@ export default class BookingAttractionsPage extends BaseBookingPage {
     const btn = await this.findElementByLocator(this.attractionsSearchFormSubmitLocator)
     await btn.click()
 
+    logger.info("Attraction results page opened")
     return new BookingAttractionsResultsPage(this.driver)
   }
 }

@@ -15,11 +15,16 @@ export default class BaseBookingPage {
     return this.driver.wait(until.elementLocated(locator))
   }
 
-  protected enterText(locator: By, value: string): this {
-    (async () => {
-      await this.findElementByLocator(locator).sendKeys(value)
-    })()
+  protected async enterTextToInteractableEl(locator: By, value: string): Promise<this> {
+    await this.driver.wait(until.stalenessOf(this.driver.findElement(locator)))
+    await this.driver.findElement(locator).sendKeys('')
+    await this.driver.findElement(locator).sendKeys(value)
+    return this
+  }
 
+  protected async enterText(locator: By, value: string): Promise<this> {
+    await this.findElementByLocator(locator).sendKeys('')
+    await this.findElementByLocator(locator).sendKeys(value)
     return this
   }
 }
